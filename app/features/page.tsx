@@ -1,5 +1,6 @@
 import { FeatureHero } from "@/components/feature-page/FeatureHero";
 import FeaturesSection from "@/components/feature-page/FeaturesSection";
+import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 
 
@@ -9,6 +10,7 @@ export default function home() {
             <Navbar />
             <FeatureHero />
             <FeaturesSection />
+            <Footer />
         </div>
     )
 }

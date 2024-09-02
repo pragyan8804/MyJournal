@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import PricingCard from '@/components/cards/pricing-card';
+import Footer from '@/components/Footer';
 
 const PricingPage: React.FC = () => {
   const pricingPlans = [
@@ -10,7 +11,7 @@ const PricingPage: React.FC = () => {
       price: 'Free',
       features: ['One entry per day', 'One journal', 'Basic support'],
       buttonText: 'Sign Up',
-      href: '/signup',
+      href: '/login',
       isHighlighted: true,
     },
     {
@@ -25,7 +26,7 @@ const PricingPage: React.FC = () => {
         'Personalized stats',
       ],
       buttonText: 'Get started',
-      href: '/signup',
+      href: '/login',
       isHighlighted: false,
     },
   ];
@@ -52,6 +53,7 @@ const PricingPage: React.FC = () => {
           ))}
         </div>
       </div>
+      <Footer />
     </>
   );
 };

@@ -32,7 +32,7 @@ export function LandingHero() {
             </h1>
             <button className="mt-10">
               <Link
-                href="/signup"
+                href="/login"
                 className="px-10 py-3 rounded-xl border border-gray-300 bg-white dark:bg-slate-800 dark:text-white text-black text-lg font-semibold hover:shadow-[4px_4px_0px_0px_rgba(0,0,0)] dark:hover:shadow-[4px_4px_0px_0px_rgba(255,255,255)] transition duration-200 hover:rounded-2xl"
               >
                 Get Started

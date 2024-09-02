@@ -12,27 +12,36 @@ const handler = nextAuth({
     pages: {
         signIn: "/login",
     },
-    callbacks: {
-        async signIn(params){
+   callbacks: {
+    async signIn(params) {
+        if (!params.user.email) return false;
 
-            if(!params.user.email) return false;
+        try {
+            // Check if the user already exists in the database
+            const existingUser = await prismaClient.user.findUnique({
+                where: { email: params.user.email },  // Ensure email is a string
+            });
 
-            try{
+            if (!existingUser) {
+                // If the user does not exist, create a new user
                 await prismaClient.user.create({
                     data: {
-                        name: params.user.name,
+                        name: params.user.name ?? "Anonymous",
                         email: params.user.email,
-                        image: params.user.image,
+                        image: params.user.image ?? "",
                         provider: "Google"
                     }
-                })
-            }catch(e){
-                console.log(e)
-                return false
+                });
             }
+            // If the user already exists, or after creating a new user, allow sign in
             return true;
+        } catch (e) {
+            console.log(e);
+            return false;
         }
     }
+}
+
 });
 
 export { handler as GET, handler as POST };
