@@ -12,3 +12,8 @@ declare module '@editorjs/quote' {
   const Quote: any;
   export default Quote;
 }
+
+declare module '@editorjs/table' {
+  const Table: any;
+  export default Table;
+}

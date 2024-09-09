@@ -1,67 +1,71 @@
-'use client';
+"use client";
 
-import React, { useEffect, useRef } from 'react';
 import EditorJS from '@editorjs/editorjs';
-import Header from '@editorjs/header';
-import List from '@editorjs/list';
-import Quote from '@editorjs/quote';
+import { useEffect, useRef, useState } from 'react';
 
-const Editor = () => {
-  const editorRef = useRef<EditorJS>();
+export default function Editor(){
+
+  const [isMounted, setIsMounted] = useState(false);
+  const ref = useRef<EditorJS>();
+
+  const initializeEditor = async () => {
+
+    const EditorJs = (await import('@editorjs/editorjs')).default;
+    const Header = (await import('@editorjs/header')).default;
+    const List = (await import('@editorjs/list')).default; 
+    const Table = (await import('@editorjs/table')).default; 
+
+    if (!ref.current) {
+
+      const editor = new EditorJS({
+        holder: 'editorjs',
+        placeholder: 'Type here to write your story...',
+        tools: {
+          header: Header,
+          list: List,
+          table: Table,
+        }
+      });
+      ref.current = editor;
+    }
+  };
 
   useEffect(() => {
-    const initializeEditor = async () => {
-      if (!editorRef.current) {
-        editorRef.current = new EditorJS({
-          holder: 'editorjs',
-          placeholder: 'Type here to write your story...',
-          tools: { 
-            header: {
-                class: Header,
-                shortcut: 'CMD+SHIFT+H',
-                inlineToolbar: ['link'], 
-                config: {
-                    placeholder: 'Enter a header',
-                    levels: [1, 2, 3, 4, 5, 6],
-                    defaultLevel: 3,
-                }
-            },
-            list: {
-                class: List,
-                shortcut: 'CMD+SHIFT+L',
-                inlineToolbar: true,
-                config: {
-                    defaultStyle: 'unordered'
-                }
-         },
-            quote: {
-                class: Quote,
-                inlineToolbar: true,
-                shortcut: 'CMD+SHIFT+O',
-                config: {
-                    quotePlaceholder: 'Enter a quote',
-                    captionPlaceholder: 'Quote\'s author',
-                },
-            },
-        },
-        });
-      }
-    };
-
-    initializeEditor();
-
-    return () => {
-      if (editorRef.current && typeof editorRef.current.destroy === 'function') {
-        const destroyEditor : any = editorRef.current.destroy();
-        if (destroyEditor instanceof Promise) {
-          destroyEditor.catch((err) => console.error('Error destroying editor:', err));
-        }
-        editorRef.current = undefined;
-      }
-    };
+    if(typeof window !== 'undefined') {
+      setIsMounted(true);
+    }
   }, []);
 
-  return <div id="editorjs" />;
-};
+  useEffect(() => {
+    const init = async () => {
+      await initializeEditor();
+    }
 
-export default Editor;
+    if(isMounted) {
+      init();
+
+      return () => {
+        if (ref.current) {
+          ref.current.destroy();
+        }
+      }; 
+    }
+
+  }, [isMounted]);
+
+  const save = () => { 
+    if (ref.current) {
+      ref.current.save().then((outputData) => {
+        console.log("Article data: ", outputData);
+        alert(JSON.stringify(outputData));
+    });
+   }
+  };
+
+  return (
+    <div className='min-h-screen'>
+      <div id="editorjs" className='mt-10 min-h-100 max-w-full prose' />
+      <button onClick={save} className="text-2xl p-2 m-2 bg-slate-500 rounded-lg">Save</button>
+    </div>
+  );
+}

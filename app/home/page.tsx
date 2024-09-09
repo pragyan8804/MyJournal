@@ -6,7 +6,7 @@ import DateToday from '@/components/home-page/DateToday';
 
 export default function Home() {
   return (
-    <div className='bg-slate-200 dark:bg-slate-900 min-h-screen'>
+    <div className='bg-slate-200 dark:bg-slate-900'>
       <h1>Home</h1>
       <div className='flex justify-end mr-[20rem]'>
         <DateToday />
