@@ -5,6 +5,8 @@ import { cn } from "@/lib/utils"
 import { Providers } from "./providers";
 import { Inter as FontSans } from "next/font/google"
 
+import './globals.css'
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
