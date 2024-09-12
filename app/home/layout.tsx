@@ -11,7 +11,7 @@ export default function HomeLayout({ children }: { children: React.ReactNode }) 
     <div className="flex h-screen">
       <CommandPalette  />
       <HomeSidebar activePath={activePath} />
-      <main className="flex-1">
+      <main className="flex-1 overflow-y-auto">
         {children}
       </main>
     </div>

@@ -43,7 +43,7 @@ export function HomeSidebar({ activePath }: HomeSidebarProps) {
     },
     {
       label: "Keyboard Shortcuts",
-      href: "/home/profile",
+      href: "/home/kbd-shortcuts",
       icon: (
         <IconKeyboard className="text-slate-700 dark:text-slate-200 h-5 w-5 flex-shrink-0" />
       ),

@@ -68,7 +68,7 @@ export function CommandPalette() {
           leaveTo="opacity-0 scale-95"
         >
           <div className="relative max-w-xl mx-auto">
-            <Dialog.Panel className="bg-slate-200 dark:bg-slate-700 rounded-xl shadow-2xl ring-1 ring-slate-400/5 dark:ring-slate-600/5 divide-y divide-slate-400 dark:divide-slate-600 overflow-hidden"
+            <Dialog.Panel className="bg-slate-300 dark:bg-slate-700 rounded-xl shadow-2xl ring-1 ring-slate-400/5 dark:ring-slate-600/5 divide-y divide-slate-400 dark:divide-slate-600 overflow-hidden"
               onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside the palette
             >
               <Combobox as="div">

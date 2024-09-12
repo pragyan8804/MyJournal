@@ -17,14 +17,6 @@ export type EditorHeaderProps = {
 }
 
 export const EditorHeader = ({ editor, collabState, users, isSidebarOpen, toggleSidebar }: EditorHeaderProps) => {
-  const { characters, words } = useEditorState({
-    editor,
-    selector: (ctx): { characters: number; words: number } => {
-      const { characters, words } = ctx.editor?.storage.characterCount || { characters: () => 0, words: () => 0 }
-      return { characters: characters(), words: words() }
-    },
-    equalityFn: deepEqual,
-  })
 
   return (
     <div className="flex flex-row items-center justify-between flex-none py-2 pl-6 pr-3 text-slate-900 bg-slate-200 border-b border-slate-300 dark:bg-slate-900 dark:text-slate-100 dark:border-slate-800">
@@ -41,7 +33,6 @@ export const EditorHeader = ({ editor, collabState, users, isSidebarOpen, toggle
         </div>
       </div>
       <SearchBar />
-      {/* <EditorInfo characters={characters} words={words} collabState={collabState} users={users} /> */}
     </div>
   )
 }
