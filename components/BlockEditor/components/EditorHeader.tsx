@@ -7,6 +7,7 @@ import { Editor } from '@tiptap/core'
 import { useEditorState } from '@tiptap/react'
 import deepEqual from 'fast-deep-equal'
 import SearchBar from './SearchBar'
+import { ThemeToggler } from '@/components/theme/ThemeToggler'
 
 export type EditorHeaderProps = {
   isSidebarOpen?: boolean
@@ -32,7 +33,10 @@ export const EditorHeader = ({ editor, collabState, users, isSidebarOpen, toggle
           </Toolbar.Button>
         </div>
       </div>
-      <SearchBar />
+      <div className='flex gap-5'>
+        <ThemeToggler />
+        <SearchBar />
+      </div>
     </div>
   )
 }

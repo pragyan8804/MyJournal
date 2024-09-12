@@ -49,13 +49,6 @@ export function HomeSidebar({ activePath }: HomeSidebarProps) {
       ),
     },
     {
-      label: "Settings",
-      href: "/home/settings",
-      icon: (
-        <IconSettings className="text-slate-700 dark:text-slate-200 h-5 w-5 flex-shrink-0" />
-      ),
-    },
-    {
       label: "Logout",
       href: "/logout",
       icon: (
