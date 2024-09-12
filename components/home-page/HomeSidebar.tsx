@@ -7,7 +7,8 @@ import {
   IconBrandTabler,
   IconSettings,
   IconUserBolt,
-  IconCalendarMonth
+  IconCalendarMonth,
+  IconKeyboard
 } from "@tabler/icons-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -41,10 +42,10 @@ export function HomeSidebar({ activePath }: HomeSidebarProps) {
       ),
     },
     {
-      label: "Profile",
+      label: "Keyboard Shortcuts",
       href: "/home/profile",
       icon: (
-        <IconUserBolt className="text-slate-700 dark:text-slate-200 h-5 w-5 flex-shrink-0" />
+        <IconKeyboard className="text-slate-700 dark:text-slate-200 h-5 w-5 flex-shrink-0" />
       ),
     },
     {

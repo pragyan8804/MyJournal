@@ -6,6 +6,7 @@ import { Toolbar } from '@/components/ui/Toolbar'
 import { Editor } from '@tiptap/core'
 import { useEditorState } from '@tiptap/react'
 import deepEqual from 'fast-deep-equal'
+import SearchBar from './SearchBar'
 
 export type EditorHeaderProps = {
   isSidebarOpen?: boolean
@@ -39,7 +40,8 @@ export const EditorHeader = ({ editor, collabState, users, isSidebarOpen, toggle
           </Toolbar.Button>
         </div>
       </div>
-      <EditorInfo characters={characters} words={words} collabState={collabState} users={users} />
+      <SearchBar />
+      {/* <EditorInfo characters={characters} words={words} collabState={collabState} users={users} /> */}
     </div>
   )
 }
