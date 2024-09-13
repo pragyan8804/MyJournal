@@ -7,6 +7,13 @@ import { useCallback } from 'react'
 
 const FONT_FAMILY_GROUPS = [
   {
+    label: 'Handwriting',
+    options: [
+      { label: 'Caveat', value: 'Caveat, cursive' },
+      { label: 'Grey Qo', value: 'Grey Qo, serif' },
+    ],
+  },
+  {
     label: 'Sans Serif',
     options: [
       { label: 'Inter', value: '' },
@@ -38,9 +45,9 @@ export type FontFamilyPickerProps = {
   value: string
 }
 
-export const FontFamilyPicker = ({ onChange, value }: FontFamilyPickerProps) => {
-  const currentValue = FONT_FAMILIES.find(size => size.value === value)
-  const currentFontLabel = currentValue?.label.split(' ')[0] || 'Inter'
+export const FontFamilyPicker = ({ onChange, value = 'Caveat, cursive' }: FontFamilyPickerProps) => {
+  const currentValue = FONT_FAMILIES.find(font => font.value === value)
+  const currentFontLabel = currentValue?.label.split(' ')[0] || 'Caveat'  // default font caveat
 
   const selectFont = useCallback((font: string) => () => onChange(font), [onChange])
 

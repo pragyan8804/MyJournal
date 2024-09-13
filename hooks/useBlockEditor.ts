@@ -14,6 +14,38 @@ import type { EditorUser } from '../components/BlockEditor/types'
 import { initialContent } from '@/lib/data/initialContent'
 import { Ai } from '@/extensions/Ai'
 import { AiImage, AiWriter } from '@/extensions'
+import Paragraph from '@tiptap/extension-paragraph'
+
+// Custom extension to add default font and size to paragraphs
+const DefaultStyleExtension = Paragraph.extend({
+  addGlobalAttributes() {
+    return [
+      {
+        types: ['paragraph'], // Apply to paragraph nodes
+        attributes: {
+          fontFamily: {
+            default: 'Caveat',
+            parseHTML: element => element.style.fontFamily || 'Caveat',
+            renderHTML: attributes => {
+              return {
+                style: `font-family: ${attributes.fontFamily}`,
+              }
+            },
+          },
+          fontSize: {
+            default: '24px',
+            parseHTML: element => element.style.fontSize || '24px',
+            renderHTML: attributes => {
+              return {
+                style: `font-size: ${attributes.fontSize}`,
+              }
+            },
+          },
+        },
+      },
+    ]
+  },
+})
 
 declare global {
   interface Window {
@@ -56,8 +88,13 @@ export const useBlockEditor = ({
           ctx.editor.commands.setContent(initialContent)
           ctx.editor.commands.focus('start', { scrollIntoView: true })
         }
+
+        // Set default styles for the initial paragraph
+        ctx.editor.commands.setFontFamily('Caveat')
+        ctx.editor.commands.setFontSize('24px')
       },
       extensions: [
+        DefaultStyleExtension, // Use the custom extension for default styles
         ...ExtensionKit({
           provider,
         }),
@@ -100,6 +137,7 @@ export const useBlockEditor = ({
     },
     [ydoc, provider],
   )
+
   const users = useEditorState({
     editor,
     selector: (ctx): (EditorUser & { initials: string })[] => {

@@ -60,7 +60,7 @@ export const TextMenu = ({ editor }: TextMenuProps) => {
       updateDelay={100}
     >
       <Toolbar.Wrapper>
-        <AIDropdown
+        {/* <AIDropdown
           onCompleteSentence={commands.onCompleteSentence}
           onEmojify={commands.onEmojify}
           onFixSpelling={commands.onFixSpelling}
@@ -70,11 +70,14 @@ export const TextMenu = ({ editor }: TextMenuProps) => {
           onTldr={commands.onTldr}
           onTone={commands.onTone}
           onTranslate={commands.onTranslate}
-        />
-        <Toolbar.Divider />
+        /> */}
+        {/* <Toolbar.Divider /> */}
         <MemoContentTypePicker options={blockOptions} />
-        <MemoFontFamilyPicker onChange={commands.onSetFont} value={states.currentFont || ''} />
-        <MemoFontSizePicker onChange={commands.onSetFontSize} value={states.currentSize || ''} />
+
+        {/* Default font should be Caveat, default font size should be 24px */}
+        
+        <MemoFontFamilyPicker onChange={commands.onSetFont} value={states.currentFont || 'Caveat'} />
+        <MemoFontSizePicker onChange={commands.onSetFontSize} value={states.currentSize || '24px'} />
         <Toolbar.Divider />
         <MemoButton tooltip="Bold" tooltipShortcut={['Mod', 'B']} onClick={commands.onBold} active={states.isBold}>
           <Icon name="Bold" />

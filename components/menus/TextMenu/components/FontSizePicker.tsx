@@ -7,10 +7,10 @@ import { useCallback } from 'react'
 
 const FONT_SIZES = [
   { label: 'Smaller', value: '12px' },
-  { label: 'Small', value: '14px' },
-  { label: 'Medium', value: '' },
-  { label: 'Large', value: '18px' },
-  { label: 'Extra Large', value: '24px' },
+  { label: 'Small', value: '16px' },
+  { label: 'Medium', value: '24px' },
+  { label: 'Large', value: '32px' },
+  { label: 'Extra Large', value: '48px' },
 ]
 
 export type FontSizePickerProps = {

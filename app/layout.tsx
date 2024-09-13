@@ -26,6 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Grey+Qo&display=swap" rel="stylesheet" />
+      </head>
       <body className={cn(
           "min-h-screen bg-background font-sans antialiased bg-slate-100 dark:bg-slate-950",
           fontSans.variable

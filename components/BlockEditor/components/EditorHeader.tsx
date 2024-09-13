@@ -1,5 +1,4 @@
 import { Icon } from '@/components/ui/Icon'
-import { EditorInfo } from './EditorInfo'
 import { EditorUser } from '../types'
 import { WebSocketStatus } from '@hocuspocus/provider'
 import { Toolbar } from '@/components/ui/Toolbar'
