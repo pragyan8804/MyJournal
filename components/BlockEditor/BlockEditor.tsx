@@ -38,9 +38,9 @@ export const BlockEditor = ({
   }
 
   return (
-    <div className="flex h-full" ref={menuContainerRef}>
+    <div className="flex h-full min-h-screen" ref={menuContainerRef}>
       <Sidebar isOpen={leftSidebar.isOpen} onClose={leftSidebar.close} editor={editor} />
-      <div className="relative flex flex-col flex-1 h-full overflow-hidden">
+      <div className="relative flex flex-col flex-1 h-full overflow-hidden min-h-screen">
         <EditorHeader
           editor={editor}
           collabState={collabState}

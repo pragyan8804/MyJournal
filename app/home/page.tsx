@@ -7,6 +7,7 @@ import { TiptapCollabProvider } from '@hocuspocus/provider'
 import { BlockEditor } from '@/components/BlockEditor';
 import { useSearchParams } from 'next/navigation';
 import { Doc as YDoc } from 'yjs'
+import Shimmer from './loading';
 
 export default function Home({ params }: { params: { room: string } }) {
   const [provider, setProvider] = useState<TiptapCollabProvider | null>(null)
@@ -97,7 +98,9 @@ export default function Home({ params }: { params: { room: string } }) {
     }
   }, [setProvider, collabToken, ydoc, room, hasCollab])
 
-  if ((hasCollab && !provider) || aiToken === undefined || collabToken === undefined) return
+ if ((hasCollab && !provider) || aiToken === undefined || collabToken === undefined) {
+    return <Shimmer />;
+  }
 
   return (
     <div className='bg-slate-200 dark:bg-slate-900'>

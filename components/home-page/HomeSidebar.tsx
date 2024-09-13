@@ -50,7 +50,7 @@ export function HomeSidebar({ activePath }: HomeSidebarProps) {
     },
     {
       label: "Logout",
-      href: "/logout",
+      href: "/home/logout",
       icon: (
         <IconArrowLeft className="text-slate-700 dark:text-slate-200 h-5 w-5 flex-shrink-0" />
       ),
