@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/Button'
+import { Button } from '@/components/ui/Button/Button'
 import { Icon } from '@/components/ui/Icon'
 import { Surface } from '@/components/ui/Surface'
 import { Toggle } from '@/components/ui/Toggle'
@@ -57,7 +57,7 @@ export const LinkEditorPanel = ({ onSetLink, initialOpenInNewTab, initialUrl }: 
             onChange={state.onChange}
           />
         </label>
-        <Button variant="outline" size="sm" type="submit" disabled={!state.isValidUrl}>
+        <Button variant="primary" buttonSize="small" type="submit" disabled={!state.isValidUrl}>
           Set Link
         </Button>
       </form>
