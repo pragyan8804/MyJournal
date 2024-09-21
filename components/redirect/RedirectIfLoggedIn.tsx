@@ -12,7 +12,7 @@ export function RedirectIfLoggedIn() {
         if(session?.data?.user) {
             router.push("/home")
         }
-    }, [session])
+    }, [session, router])
 
     return null
 }
