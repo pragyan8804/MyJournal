@@ -35,7 +35,6 @@ import {
   TrailingNode,
   Typography,
   Underline,
-  emojiSuggestion,
   Columns,
   Column,
   TaskItem,
