@@ -1,27 +1,17 @@
 import { useEffect, useState } from 'react'
 import { useEditor, useEditorState } from '@tiptap/react'
-import deepEqual from 'fast-deep-equal'
 import type { AnyExtension, Editor } from '@tiptap/core'
-import Collaboration from '@tiptap/extension-collaboration'
-import CollaborationCursor from '@tiptap/extension-collaboration-cursor'
-import { TiptapCollabProvider, WebSocketStatus } from '@hocuspocus/provider'
-import type { Doc as YDoc } from 'yjs'
+import Paragraph from '@tiptap/extension-paragraph'
 
 import { ExtensionKit } from '@/extensions/extension-kit'
-import { userColors, userNames } from '../lib/constants'
-import { randomElement } from '../lib/utils/index'
-import type { EditorUser } from '../components/BlockEditor/types'
 import { initialContent } from '@/lib/data/initialContent'
-import { Ai } from '@/extensions/Ai'
-import { AiImage, AiWriter } from '@/extensions'
-import Paragraph from '@tiptap/extension-paragraph'
 
 // Custom extension to add default font and size to paragraphs
 const DefaultStyleExtension = Paragraph.extend({
   addGlobalAttributes() {
     return [
       {
-        types: ['paragraph'], // Apply to paragraph nodes
+        types: ['paragraph'],
         attributes: {
           fontFamily: {
             default: 'Caveat',
@@ -53,79 +43,27 @@ declare global {
   }
 }
 
-export const useBlockEditor = ({
-  aiToken,
-  ydoc,
-  provider,
-  userId,
-  userName = 'Maxi',
-}: {
-  aiToken?: string
-  ydoc: YDoc
-  provider?: TiptapCollabProvider | null | undefined
-  userId?: string
-  userName?: string
-}) => {
-  const [collabState, setCollabState] = useState<WebSocketStatus>(
-    provider ? WebSocketStatus.Connecting : WebSocketStatus.Disconnected,
-  )
-
+export const useBlockEditor = () => {
   const editor = useEditor(
     {
+      editable: true,
       immediatelyRender: true,
-      shouldRerenderOnTransaction: false,
+      // shouldRerenderOnTransaction: false,
       autofocus: true,
-      onCreate: ctx => {
-        if (provider && !provider.isSynced) {
-          provider.on('synced', () => {
-            setTimeout(() => {
-              if (ctx.editor.isEmpty) {
-                ctx.editor.commands.setContent(initialContent)
-              }
-            }, 0)
-          })
-        } else if (ctx.editor.isEmpty) {
-          ctx.editor.commands.setContent(initialContent)
-          ctx.editor.commands.focus('start', { scrollIntoView: true })
-        }
+      // onCreate: ctx => {
+      //   if (ctx.editor.isEmpty) {
+      //     ctx.editor.commands.setContent(initialContent)
+      //     ctx.editor.commands.focus('start', { scrollIntoView: true })
+      //   }
 
-        // Set default styles for the initial paragraph
-        ctx.editor.commands.setFontFamily('Caveat')
-        ctx.editor.commands.setFontSize('24px')
-      },
+      //   // Set default styles for the initial paragraph
+      //   ctx.editor.commands.setFontFamily('Caveat')
+      //   ctx.editor.commands.setFontSize('24px')
+      // },
       extensions: [
-        DefaultStyleExtension, // Use the custom extension for default styles
-        ...ExtensionKit({
-          provider,
-        }),
-        provider
-          ? Collaboration.configure({
-              document: ydoc,
-            })
-          : undefined,
-        provider
-          ? CollaborationCursor.configure({
-              provider,
-              user: {
-                name: randomElement(userNames),
-                color: randomElement(userColors),
-              },
-            })
-          : undefined,
-        aiToken
-          ? AiWriter.configure({
-              authorId: userId,
-              authorName: userName,
-            })
-          : undefined,
-        aiToken
-          ? AiImage.configure({
-              authorId: userId,
-              authorName: userName,
-            })
-          : undefined,
-        aiToken ? Ai.configure({ token: aiToken }) : undefined,
-      ].filter((e): e is AnyExtension => e !== undefined),
+        DefaultStyleExtension,
+        ...ExtensionKit({}),
+      ],
       editorProps: {
         attributes: {
           autocomplete: 'off',
@@ -135,35 +73,9 @@ export const useBlockEditor = ({
         },
       },
     },
-    [ydoc, provider],
   )
-
-  const users = useEditorState({
-    editor,
-    selector: (ctx): (EditorUser & { initials: string })[] => {
-      if (!ctx.editor?.storage.collaborationCursor?.users) {
-        return []
-      }
-
-      return ctx.editor.storage.collaborationCursor.users.map((user: EditorUser) => {
-        const names = user.name?.split(' ')
-        const firstName = names?.[0]
-        const lastName = names?.[names.length - 1]
-        const initials = `${firstName?.[0] || '?'}${lastName?.[0] || '?'}`
-
-        return { ...user, initials: initials.length ? initials : '?' }
-      })
-    },
-    equalityFn: deepEqual,
-  })
-
-  useEffect(() => {
-    provider?.on('status', (event: { status: WebSocketStatus }) => {
-      setCollabState(event.status)
-    })
-  }, [provider])
 
   window.editor = editor
 
-  return { editor, users, collabState }
+  return { editor }
 }

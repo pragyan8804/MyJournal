@@ -10,7 +10,7 @@ export default function HomeLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <div className="flex h-screen">
-      {/* <RedirectIfLoggedOut /> */}
+      <RedirectIfLoggedOut />
       <CommandPalette  />
       <HomeSidebar activePath={activePath} />
       <main className="flex-1 overflow-y-auto">

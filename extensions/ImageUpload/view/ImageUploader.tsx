@@ -42,7 +42,7 @@ export const ImageUploader = ({ onUpload }: { onUpload: (url: string) => void })
           {draggedInside ? 'Drop image here' : 'Drag and drop or'}
         </div>
         <div>
-          <Button disabled={draggedInside} onClick={handleUploadClick} variant="primary" buttonSize="small">
+          <Button disabled={draggedInside} onClick={handleUploadClick} variant="default" size="sm">
             <Icon name="Upload" />
             Upload an image
           </Button>

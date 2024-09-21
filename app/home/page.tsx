@@ -108,7 +108,7 @@ export default function Home({ params }: { params: { room: string } }) {
         <DateToday />
       </div> */}
       <div className='mx-auto min-h-screen'>
-        <BlockEditor aiToken={aiToken ?? undefined} hasCollab={hasCollab} ydoc={ydoc} provider={provider} />
+        <BlockEditor />
       </div>
     </div>
   );

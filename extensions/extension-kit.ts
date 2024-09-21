@@ -9,14 +9,9 @@ import {
   CharacterCount,
   CodeBlock,
   Color,
-  Details,
-  DetailsContent,
-  DetailsSummary,
   Document,
   Dropcursor,
-  Emoji,
   Figcaption,
-  FileHandler,
   Focus,
   FontFamily,
   FontSize,
@@ -32,7 +27,6 @@ import {
   Subscript,
   Superscript,
   Table,
-  TableOfContents,
   TableCell,
   TableHeader,
   TableRow,
@@ -46,12 +40,11 @@ import {
   Column,
   TaskItem,
   TaskList,
-  UniqueID,
 } from '.'
 
 import { ImageUpload } from './ImageUpload'
-import { TableOfContentsNode } from './TableOfContentsNode'
 import { isChangeOrigin } from '@tiptap/extension-collaboration'
+import { Transaction } from '@tiptap/pm/state'
 
 interface ExtensionKitProps {
   provider?: HocuspocusProvider | null
@@ -70,10 +63,10 @@ export const ExtensionKit = ({ provider }: ExtensionKitProps) => [
     levels: [1, 2, 3, 4, 5, 6],
   }),
   HorizontalRule,
-  UniqueID.configure({
-    types: ['paragraph', 'heading', 'blockquote', 'codeBlock', 'table'],
-    filterTransaction: transaction => !isChangeOrigin(transaction),
-  }),
+  // UniqueID.configure({
+  //   types: ['paragraph', 'heading', 'blockquote', 'codeBlock', 'table'],
+  //   filterTransaction: (transaction: Transaction) => !isChangeOrigin(transaction),
+  // }),
   StarterKit.configure({
     document: false,
     dropcursor: false,
@@ -83,14 +76,12 @@ export const ExtensionKit = ({ provider }: ExtensionKitProps) => [
     history: false,
     codeBlock: false,
   }),
-  Details.configure({
-    persist: true,
-    HTMLAttributes: {
-      class: 'details',
-    },
-  }),
-  DetailsContent,
-  DetailsSummary,
+  // Details.configure({
+  //   persist: true,
+  //   HTMLAttributes: {
+  //     class: 'details',
+  //   },
+  // }),
   CodeBlock,
   TextStyle,
   FontSize,
@@ -103,37 +94,31 @@ export const ExtensionKit = ({ provider }: ExtensionKitProps) => [
   Highlight.configure({ multicolor: true }),
   Underline,
   CharacterCount.configure({ limit: 50000 }),
-  TableOfContents,
-  TableOfContentsNode,
   ImageUpload.configure({
     clientId: provider?.document?.clientID,
   }),
   ImageBlock,
-  FileHandler.configure({
-    allowedMimeTypes: ['image/png', 'image/jpeg', 'image/gif', 'image/webp'],
-    onDrop: (currentEditor, files, pos) => {
-      files.forEach(async file => {
-        const url = await API.uploadImage(file)
+  // FileHandler.configure({
+  //   allowedMimeTypes: ['image/png', 'image/jpeg', 'image/gif', 'image/webp'],
+  //   onDrop: (currentEditor: { chain: () => { (): any; new(): any; setImageBlockAt: { (arg0: { pos: any; src: string }): { (): any; new(): any; focus: { (): { (): any; new(): any; run: { (): void; new(): any } }; new(): any } }; new(): any } } }, files: any[], pos: any) => {
+  //     files.forEach(async (file: File) => {
+  //       const url = await API.uploadImage(file)
 
-        currentEditor.chain().setImageBlockAt({ pos, src: url }).focus().run()
-      })
-    },
-    onPaste: (currentEditor, files) => {
-      files.forEach(async file => {
-        const url = await API.uploadImage(file)
+  //       currentEditor.chain().setImageBlockAt({ pos, src: url }).focus().run()
+  //     })
+  //   },
+  //   onPaste: (currentEditor: { chain: () => { (): any; new(): any; setImageBlockAt: { (arg0: { pos: any; src: string }): { (): any; new(): any; focus: { (): { (): any; new(): any; run: { (): any; new(): any } }; new(): any } }; new(): any } }; state: { selection: string } }, files: any[]) => {
+  //     files.forEach(async (file: File) => {
+  //       const url = await API.uploadImage(file)
 
-        return currentEditor
-          .chain()
-          .setImageBlockAt({ pos: currentEditor.state.selection.anchor, src: url })
-          .focus()
-          .run()
-      })
-    },
-  }),
-  Emoji.configure({
-    enableEmoticons: true,
-    suggestion: emojiSuggestion,
-  }),
+  //       return currentEditor
+  //         .chain()
+  //         .setImageBlockAt({ pos: currentEditor.state.selection.anchor, src: url })
+  //         .focus()
+  //         .run()
+  //     })
+  //   },
+  // }),
   TextAlign.extend({
     addKeyboardShortcuts() {
       return {}
