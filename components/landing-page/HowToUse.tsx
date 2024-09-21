@@ -56,7 +56,7 @@ export function HowToUse() {
             Reflect on your journey and gain valuable insights from your past experiences. 
           </p>
           <p className="text-slate-800 dark:text-slate-200 text-md md:text-xl font-normal mb-8">
-            Use these insights to foster personal growth, as you track your progress and see how far you've come.
+            Use these insights to foster personal growth, as you track your progress and see how far you&apos;ve come.
           </p>
           <div className="grid grid-cols-2 gap-4">
             <Image
