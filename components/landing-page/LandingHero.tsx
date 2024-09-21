@@ -11,8 +11,8 @@ export function LandingHero() {
 
   const imageSrc =
     theme === "dark"
-      ? "/images/landing/JournalAppDark.jpg"
-      : "/images/landing/JournalAppLight.jpg";
+      ? "/images/landing/JournalAppDark.png"
+      : "/images/landing/JournalAppLight.png";
 
   return (
     <>

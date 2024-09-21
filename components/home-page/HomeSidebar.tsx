@@ -24,7 +24,7 @@ export function HomeSidebar({ activePath }: HomeSidebarProps) {
   const { data: session, status } = useSession();
   const [open, setOpen] = useState(false);
 
-  const user = session?.user || { name: "Anon", image: "/images/landing/grow.jpg" };
+  const user = session?.user || { name: "John Doe", image: "/images/JohnDoe.webp" };
 
   const links = [
     {

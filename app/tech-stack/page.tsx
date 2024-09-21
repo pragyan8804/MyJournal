@@ -61,10 +61,10 @@ export default function TechStack() {
         </p>
         <p className="text-neutral-500 dark:text-neutral-400 text-xl md:text-3xl max-w-3xl mx-auto">
           <LinkPreview
-            url="https://editorjs.io"
+            url="https://tiptap.dev"
             className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-blue-300 dark:from-blue-300 dark:to-blue-100"
           >
-            Editor.js
+            Tiptap
           </LinkPreview>{" "}
           provides a powerful and customizable editor experience.
         </p>
