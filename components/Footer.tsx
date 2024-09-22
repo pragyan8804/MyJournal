@@ -5,22 +5,24 @@ import Link from 'next/link';
 const Footer: React.FC = () => {
   return (
     <footer className="footer bg-slate-200 dark:bg-slate-900 text-base-content p-10 flex justify-around items-start rounded-3xl">
-      <aside className="flex flex-col items-start">
-        <Image
-          src="/logo.jpg"
-          width={50}
-          height={50}
-          alt="MyJournal Logo"
-          className="mb-2"
-        />
-        <p className="text-lg font-medium">
-          MyJournal
-          <br />
-          <span className="text-sm font-normal">
-            Capture your moments, your way
-          </span>
-        </p>
-      </aside>
+      <Link href="/" className="link link-hover" >
+        <aside className="flex flex-col items-start">
+          <Image
+            src="/logo.jpg"
+            width={50}
+            height={50}
+            alt="MyJournal Logo"
+            className="mb-2"
+          />
+          <p className="text-lg font-medium">
+            MyJournal
+            <br />
+            <span className="text-sm font-normal">
+              Capture your moments, your way
+            </span>
+          </p>
+        </aside>
+      </Link>
       <nav>
         <h6 className="footer-title font-semibold mb-4">SERVICES</h6>
         <Link href="/pricing" className="link link-hover block">Pricing</Link>
@@ -36,7 +38,7 @@ const Footer: React.FC = () => {
       </nav>
       <nav>
         <h6 className="footer-title font-semibold mb-4">LEGAL</h6>
-        <Link href="/terms-of-use" className="link link-hover block">Terms of use</Link>
+        <Link href="/terms-of-service" className="link link-hover block">Terms of service</Link>
         <Link href="/privacy-policy" className="link link-hover block">Privacy policy</Link>
         <Link href="/cookie-policy" className="link link-hover block">Cookie policy</Link>
       </nav>
