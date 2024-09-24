@@ -12,7 +12,7 @@ export const Navbar = () => {
    const session = useSession()
 
   return (
-    <nav className="sticky top-5 bg-white bg-opacity-95 dark:bg-slate-950 py-2 px-10 border border-slate-300 dark:border-slate-700 rounded-xl shadow-md transition-all duration-300 ease-in-out flex items-center justify-between max-w-2xl mx-auto z-50 text-slate-900 dark:text-slate-100">
+    <nav className="sticky top-5 bg-white/50 dark:bg-slate-950/50 backdrop-blur-md py-2 px-10 border border-slate-300 dark:border-slate-700 rounded-xl shadow-md transition-all duration-300 ease-in-out flex items-center justify-between max-w-2xl mx-auto z-50 text-slate-900 dark:text-slate-100">
       <div className="flex items-center space-x-">
         <Link href="/">
           <Image src="/logo.jpg" alt="Logo" width={32} height={32} />
